@@ -193,7 +193,7 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
         <section className="current-weather" aria-label="Current weather">
           <h2 className="city-name">
   <HiOutlineLocationMarker className="location-icon" />
-  {weather.name}
+  {weather.name}, {weather.sys.country}
 </h2>
 
           <p className="temperature">
