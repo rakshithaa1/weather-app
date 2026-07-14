@@ -45,7 +45,7 @@ weather-app-rakshithaa1s-projects.vercel.app
 Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/weather-app.git
+git clone https://github.com/rakshithaa1/weather-app
 ```
 
 Go to the project
