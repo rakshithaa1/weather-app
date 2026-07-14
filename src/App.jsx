@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 
 function App() {
@@ -39,9 +40,9 @@ function App() {
   }, [history, isLoaded]);
 
   async function handleSearch(searchCity = city) {
-  const API_KEY = "cc9d80447b886762bdbbfdf981860d5c";
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
-  // ⭐ normalize input
+  // normalize input
   searchCity = searchCity.trim().toLowerCase();
 
   if (!searchCity) {
@@ -89,7 +90,7 @@ function App() {
 
     const forecastData = await forecastRes.json();
 
-    // ⭐ safer forecast handling
+    // safer forecast handling
     if (!forecastData.list) {
       setError("Error loading forecast");
       setLoading(false);
@@ -122,17 +123,18 @@ function App() {
   setLoading(false);
 }
   return (
-  <div className="app">
-    <div className="weather-card">
-      <div className="header">
+  <main className="app">
+    <section className="weather-card" aria-label="Weather application card">
+      <header className="header">
         <p>Weather App</p>
         <h1>Check Forecast</h1>
-      </div>
+      </header>
 
       <div className="search-box">
         <input
           type="text"
           placeholder="Enter city name"
+          aria-label="Search city"
           value={city}
           autoFocus
           onChange={(e) => {
@@ -146,61 +148,106 @@ function App() {
           }}
         />
 
-<button onClick={() => handleSearch()} disabled={!city || loading}>
-{loading ? "Loading..." : "Search"}
+        <button 
+  aria-label="Search weather"
+  onClick={() => handleSearch()}
+        onClick={() => handleSearch()} disabled={!city || loading}>
+          {loading ? "Searching..." : "Search"}
         </button>
       </div>
 
       {history.length > 0 && (
-        <div className="history">
+        <section className="history" aria-label="Recent searches">
           <p>Recent searches</p>
           <div className="history-buttons">
             {history.map((item, index) => (
-              <button key={index} onClick={() => handleSearch(item)}>
+              <button key={index} 
+              aria-label={`Search weather for ${item}`}
+              onClick={() => handleSearch(item)}>
                 {item}
               </button>
             ))}
           </div>
-        </div>
+        </section>
       )}
 
       {!weather && !loading && !error && (
-        <p className="message">Search for a city to see weather</p>
+        <div className="message-card">
+          <p className="message">Search for a city to see weather</p>
+        </div>
       )}
 
-{loading && <p className="message">Fetching weather data...</p>}
-      {error && <p className="error">{error}</p>}
+      {loading && (
+  <div className="status-card loading-card">
+    <p>Fetching weather data...</p>
+  </div>
+)}
+
+{error && (
+  <div className="status-card error-card">
+    <p>{error}</p>
+  </div>
+)}
 
       {weather && (
-        <div className="current-weather">
-          <h2>{weather.name}</h2>
-          <p className="temperature">{weather.main.temp}°C</p>
+        <section className="current-weather" aria-label="Current weather">
+          <h2 className="city-name">
+  <HiOutlineLocationMarker className="location-icon" />
+  {weather.name}
+</h2>
+
+          <p className="temperature">
+            {Math.round(weather.main.temp)}°C
+          </p>
+
           <p className="description">
             {getWeatherIcon(weather.weather[0].main.toLowerCase())}{" "}
             {weather.weather[0].description}
           </p>
-        </div>
+
+          <div className="weather-details">
+            <div className="detail-card">
+              <span>Feels Like</span>
+              <strong>{Math.round(weather.main.feels_like)}°C</strong>
+            </div>
+
+            <div className="detail-card">
+              <span>Humidity</span>
+              <strong>{weather.main.humidity}%</strong>
+            </div>
+
+            <div className="detail-card">
+              <span>Wind</span>
+              <strong>{weather.wind.speed} m/s</strong>
+            </div>
+
+            <div className="detail-card">
+              <span>Pressure</span>
+              <strong>{weather.main.pressure} hPa</strong>
+            </div>
+          </div>
+        </section>
       )}
 
       {forecast.length > 0 && (
-        <div className="forecast">
+        <section className="forecast" aria-label="Five day forecast">
           <h3>5-Day Forecast</h3>
           <div className="forecast-list">
             {forecast.map((item, index) => (
-              <div className="forecast-card" key={index}>
+              <article className="forecast-card" key={index}>
                 <p className="day">
                   {new Date(item.dt_txt).toLocaleDateString("en-US", {
                     weekday: "short",
                   })}
                 </p>
                 <p className="forecast-temp">{Math.round(item.main.temp)}°C</p>
-              </div>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
       )}
-    </div>
-  </div>
+    </section>
+  </main>
 );
 
 }
