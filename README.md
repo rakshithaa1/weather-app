@@ -1,16 +1,78 @@
-# React + Vite
+# 🌤 Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React weather application that provides real-time weather information and a 5-day forecast using the OpenWeather API. Users can search for cities worldwide, view detailed weather conditions, and quickly access recent searches.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+weather-app-rakshithaa1s-projects.vercel.app 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 Search weather by city name
+- 🌡️ Current weather information
+- 📅 5-day weather forecast
+- 📍 Displays city and country
+- 🌤️ Weather description with icon
+- 🤗 Feels Like temperature
+- 💧 Humidity
+- 🌬️ Wind Speed
+- 🌡️ Atmospheric Pressure
+- 🕒 Recent search history
+- ⌨️ Search using Enter key
+- ⚠️ Error handling for invalid cities
+- ⏳ Loading state while fetching weather
+- 📱 Fully responsive design
+- 🔐 API key secured using Vite Environment Variables
+
+---
+
+## 🛠️ Built With
+
+- React
+- JavaScript (ES6+)
+- CSS3
+- Vite
+- OpenWeather API
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/weather-app.git
+```
+
+Go to the project
+
+```bash
+cd weather-app
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Create a `.env` file in the project root
+
+```env
+VITE_WEATHER_API_KEY=YOUR_API_KEY
+```
+
+Start the development server
+
+```bash
+npm run dev
+```
+---
+
+## 👨‍💻 Author
+
+Rakshitha
